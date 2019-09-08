@@ -1,7 +1,5 @@
 <p id="notice"><%= notice %></p>
-
 <h1>Feeds</h1>
-
 <table>
   <thead>
     <tr>
@@ -14,14 +12,13 @@
     <% @feeds.each do |feed| %>
       <tr>
         <td><%= image_tag feed.image.url %></td>
-        <td><%= link_to 'Show', feed %></td>
-        <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
-        <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= feed.content %></td>
+        <td><%= link_to '確認', feed %></td>
+        <td><%= link_to '編集', edit_feed_path(feed) %></td>
+        <td><%= link_to '削除', feed, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
-
-<%= link_to 'New Feed', new_feed_path %>
+<%= link_to '新規投稿', new_feed_path %>

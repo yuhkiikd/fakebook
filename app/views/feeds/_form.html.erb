@@ -17,8 +17,13 @@
     <%= form.file_field :image %>
     <%= form.hidden_field :image_cache %>
   </div>
+  <div class="fakebook_content">
+     <%= form.label :content %>
+     <%= form.text_field :content %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>
+    <%= form.submit '戻る', name: 'back' %>
   </div>
 <% end %>
