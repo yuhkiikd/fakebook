@@ -1,5 +1,5 @@
 class FeedsController < ApplicationController
-  before_action :set_feed, only: [:show, :edit, :update, :destroy]
+  before_action :set_feed, only: [:show, :edit, :update, :destroy, :confirm]
 
   # GET /feeds
   # GET /feeds.json
@@ -48,14 +48,17 @@ class FeedsController < ApplicationController
   # PATCH/PUT /feeds/1
   # PATCH/PUT /feeds/1.json
   def update
-    @feed = current_user.feeds.build(feed_params)
-    respond_to do |format|
+    if params[:back]
+      redirect_to feeds_path
+    elsif params[:delete_image]
+      @feed.image = nil
+      @feed.save
+      redirect_to edit_feed_path
+    else
       if @feed.update(feed_params)
-        format.html { redirect_to @feed, notice: 'Feed was successfully updated.' }
-        format.json { render :show, status: :ok, location: @feed }
+        redirect_to feeds_path, notice: "記事を編集しました！"
       else
-        format.html { render :edit }
-        format.json { render json: @feed.errors, status: :unprocessable_entity }
+        render :edit
       end
     end
   end

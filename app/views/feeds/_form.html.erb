@@ -1,4 +1,4 @@
-<%= form_with(model: feed, local: true, url:confirm_feeds_path) do |form| %>
+<%= form_with(model: feed, local: true, url: choose_new_or_edit ) do |form| %>
   <% if feed.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(feed.errors.count, "error") %> prohibited this feed from being saved:</h2>
@@ -13,7 +13,12 @@
 
   <div class="field">
     <%= form.label :image %>
-    <%= image_tag(@feed.image.url) if @feed.image && @feed.image.url %>
+
+    <% if @feed.image? %>
+      <%= image_tag(@feed.image.url) if @feed.image && @feed.image.url %>
+      <input type="submit" name="delete_image" value="画像削除">
+    <% end %>
+
     <%= form.file_field :image %>
     <%= form.hidden_field :image_cache %>
   </div>
