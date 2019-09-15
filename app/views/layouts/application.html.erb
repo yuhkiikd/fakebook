@@ -15,6 +15,7 @@
     <% end %>
     
     <% if logged_in? %>
+      <div>ログインユーザー：<%= current_user.name %></div>
       <%= link_to "Profile", user_path(current_user.id) %>
       <%= link_to "Log out", session_path(current_user.id), method: :delete %>
     <% else %>

@@ -11,11 +11,18 @@
   <tbody>
     <% @feeds.each do |feed| %>
       <tr>
-        <td><%= image_tag feed.image.url %></td>
+        <% if feed.image.url == nil %>
+          <td></td>
+        <% else %>
+          <td><%= image_tag feed.image.url %></td>
+        <% end %>
         <td><%= feed.content %></td>
+        <td>投稿者：<%= feed.user.name %></td>
         <td><%= link_to '確認', feed %></td>
-        <td><%= link_to '編集', edit_feed_path(feed) %></td>
-        <td><%= link_to '削除', feed, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
+        <% if current_user.id == feed.user.id %>
+          <td><%= link_to '編集', edit_feed_path(feed) %></td>
+          <td><%= link_to '削除', feed, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
