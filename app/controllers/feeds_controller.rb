@@ -1,5 +1,6 @@
 class FeedsController < ApplicationController
   before_action :set_feed, only: [:show, :edit, :update, :destroy, :confirm]
+  before_action :ensure_current_user, only: [:edit]
 
   # GET /feeds
   # GET /feeds.json
@@ -74,13 +75,18 @@ class FeedsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_feed
-      @feed = Feed.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def feed_params
-      params.require(:feed).permit(:image, :image_cache, :content)
+  def set_feed
+    @feed = Feed.find(params[:id])
+  end
+
+  def feed_params
+    params.require(:feed).permit(:image, :image_cache, :content)
+  end
+
+  def ensure_current_user
+    unless current_user.id == @feed.user_id
+      redirect_to feeds_path
     end
+  end
 end

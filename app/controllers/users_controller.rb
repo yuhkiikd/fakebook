@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :ensure_current_user, only: [:show]
   def new
     @user = User.new
   end
@@ -21,5 +22,11 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def ensure_current_user
+    unless current_user.id == params[:id].to_i
+      redirect_to feeds_path
+    end
   end
 end
