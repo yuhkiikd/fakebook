@@ -1,12 +1,34 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Image:</strong>
+<div class="wrapper">
+<p id="notice"><%= notice %></p>
+  <article class="main-contents pull-right">
+      <div class="post_content">
+        <ul class="menu-content">
+          <li>投稿者：<%= @feed.user.name %></li>
+        <% if logged_in? %>
+          <% if current_user.id == @feed.user.id %>
+            <li><%= link_to '編集', edit_feed_path(@feed) %></li>
+            <li><%= link_to '削除', feed, method: :delete, data: { confirm: '本当に削除しますか？' } %></li>
+          <% end %>
+        <% end %>
+        </ul>
+      </div>
   <% if @feed.image? %>
     <%= image_tag @feed.image.url %>
   <% end %>
   <%= @feed.content %>
-</p>
 
-<%= link_to 'Edit', edit_feed_path(@feed) %> |
-<%= link_to 'Back', feeds_path %>
+
+  </article>
+
+
+  <aside class="pull-left">
+    <% if logged_in? %>
+      ログインユーザー：<%= current_user.name %><br>
+      <%= link_to '新規投稿', new_feed_path %>
+    <% else %>
+      ようこそゲスト様
+      <%= link_to '一覧へ戻る', feeds_path %>
+    <% end %>
+  </aside>
+</div>

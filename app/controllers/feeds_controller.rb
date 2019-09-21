@@ -1,19 +1,14 @@
 class FeedsController < ApplicationController
-  before_action :set_feed, only: [:show, :edit, :update, :destroy, :confirm]
+  before_action :set_feed, only: [:show, :edit, :update, :destroy]
   before_action :ensure_current_user, only: [:edit]
 
-  # GET /feeds
-  # GET /feeds.json
   def index
     @feeds = Feed.all.order(id: "DESC")
   end
 
-  # GET /feeds/1
-  # GET /feeds/1.json
   def show
   end
 
-  # GET /feeds/new
   def new
     if params[:back]
       @feed = Feed.new(feed_params)
@@ -27,31 +22,24 @@ class FeedsController < ApplicationController
     render :new if @feed.invalid?
   end
 
-  # POST /feeds
-  # POST /feeds.json
   def create
     @feed = current_user.feeds.build(feed_params)
-    respond_to do |format|
+    if params[:back]
+      render :new
+    else
       if @feed.save
-        format.html { redirect_to @feed, notice: 'Feed was successfully created.' }
-        format.json { render :show, status: :created, location: @feed }
+        redirect_to feeds_path, notice: "ブログを作成しました！"
       else
-        format.html { render :new }
-        format.json { render json: @feed.errors, status: :unprocessable_entity }
+        render :new
       end
     end
   end
 
-  # GET /feeds/1/edit
   def edit
   end
 
-  # PATCH/PUT /feeds/1
-  # PATCH/PUT /feeds/1.json
   def update
-    if params[:back]
-      redirect_to feeds_path
-    elsif params[:delete_image]
+    if params[:delete_image]
       @feed.image = nil
       @feed.save
       redirect_to edit_feed_path
@@ -64,12 +52,10 @@ class FeedsController < ApplicationController
     end
   end
 
-  # DELETE /feeds/1
-  # DELETE /feeds/1.json
   def destroy
     @feed.destroy
     respond_to do |format|
-      format.html { redirect_to feeds_url, notice: 'Feed was successfully destroyed.' }
+      format.html { redirect_to feeds_url, notice: '記事を削除しました！' }
       format.json { head :no_content }
     end
   end
