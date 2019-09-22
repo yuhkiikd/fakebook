@@ -7,8 +7,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       redirect_to user_path(@user.id)
-      flash[:notice] = "ようこそ#{@user.name}さん"
+      flash[:info] = "ようこそ#{@user.name}さん"
     else
       render 'new'
     end
@@ -25,7 +26,7 @@ class UsersController < ApplicationController
   end
 
   def ensure_current_user
-    unless current_user.id == params[:id].to_i
+    unless logged_in? && current_user.id == params[:id].to_i
       redirect_to feeds_path
     end
   end

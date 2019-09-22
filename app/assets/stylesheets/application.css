@@ -13,6 +13,6 @@
  *= require bootstrap/dist/css/bootstrap.min
  *= require_tree .
  *= require bootstrap/dist/css/non-responsive.css
- *= require bootstrap/dist/css/bootstrap_override.css
+ *= require bootstrap/dist/css/customize.scss
  *= require_self
  */

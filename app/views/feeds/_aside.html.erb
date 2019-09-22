@@ -1,0 +1,8 @@
+<aside class="pull-left clearfix">
+<% if logged_in? %>
+  ログインユーザー：<%= current_user.name %><br>
+  <%= link_to '新規投稿', new_feed_path %>
+<% else %>
+  ようこそゲスト様
+<% end %>
+</aside>
