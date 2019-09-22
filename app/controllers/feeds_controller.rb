@@ -33,7 +33,8 @@ class FeedsController < ApplicationController
       render :new
     else
       if @feed.save
-        redirect_to feeds_path, notice: "ブログを作成しました！"
+        flash[:success] = '記事を作成しました！'
+        redirect_to feeds_path
       else
         render :new
       end
@@ -50,7 +51,8 @@ class FeedsController < ApplicationController
       redirect_to edit_feed_path
     else
       if @feed.update(feed_params)
-        redirect_to feeds_path, notice: "記事を編集しました！"
+        flash[:success] = '記事を編集しました！'
+        redirect_to feeds_path
       else
         render :edit
       end
@@ -59,10 +61,8 @@ class FeedsController < ApplicationController
 
   def destroy
     @feed.destroy
-    respond_to do |format|
-      format.html { redirect_to feeds_url, notice: '記事を削除しました！' }
-      format.json { head :no_content }
-    end
+    flash[:success] = '記事を削除しました！'
+    redirect_to feeds_url
   end
 
   private

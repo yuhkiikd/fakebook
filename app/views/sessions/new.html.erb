@@ -1,10 +1,14 @@
-<h1>Log in</h1>
-<%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
-  <%= f.label :email %>
-  <%= f.email_field :email %>
-
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-
-  <%= f.submit "Log in" %>
-<% end %>
+<div class="non-sidebar-content">
+  <h1>Log in</h1>
+  <%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
+    <div class="login-and-siginin-email">
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+    </div>
+    <div class="login-and-siginin-password">
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
+    <%= f.submit "Login" %>
+  <% end %>
+</div>

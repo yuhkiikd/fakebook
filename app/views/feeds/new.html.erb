@@ -1,6 +1,4 @@
-<div class="wrapper">
-  <div class="new-post">
-    <%= render 'form', feed: @feed %>
-    <%= link_to 'Back', feeds_path %>
-  </div>
-</div>
+<article class="main-contents pull-right">
+  <%= render 'form', feed: @feed %>
+  <%= link_to '一覧へ戻る', feeds_path %>
+</article>

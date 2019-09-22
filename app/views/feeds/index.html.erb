@@ -1,38 +1,22 @@
-<div class="notice">
-  <%= notice %>
-</div>
-<div class="wrapper">
-  <article class="main-contents pull-right">
-    <% @feeds.each do |feed| %>
-      <div class="main-contents-post">
-        <ul class="post-menu clearfix">
-          <li>投稿者：<%= feed.user.name %></li>
-          <li><%= link_to '確認', feed %></li>
-        <% if logged_in? %>
-          <% if current_user.id == feed.user.id %>
-            <li><%= link_to '編集', edit_feed_path(feed) %></li>
-            <li><%= link_to '削除', feed, method: :delete, data: { confirm: '本当に削除しますか？' } %></li>
-          <% end %>
-        <% end %>
-        </ul>
-        <div class="post_main">
-          <% unless feed.image.url == nil %>
-            <div class="post-image">
-              <%= image_tag feed.image.url %>
-            </div>
-          <% end %>
-          <%= feed.content %>
+<article class="main-contents pull-right">
+  <% @feeds.each do |feed| %>
+    <div class="main-contents-post">
+      <ul class="post-menu clearfix">
+        <li>投稿者：<%= feed.user.name %></li>
+        <li><%= link_to '確認', feed %></li>
+      <% if logged_in? && current_user.id == feed.user.id %>
+        <li><%= link_to '編集', edit_feed_path(feed) %></li>
+        <li><%= link_to '削除', feed, method: :delete, data: { confirm: '本当に削除しますか？' } %></li>
+      <% end %>
+      </ul>
+      <div class="post_main">
+      <% unless feed.image.url == nil %>
+        <div class="post-image">
+          <%= image_tag feed.image.url %>
         </div>
+      <% end %>
+        <%= feed.content %>
       </div>
-    <% end %>
-  </article>
-
-  <aside class="pull-left">
-    <% if logged_in? %>
-      ログインユーザー：<%= current_user.name %><br>
-      <%= link_to '新規投稿', new_feed_path %>
-    <% else %>
-      ようこそゲスト様
-    <% end %>
-  </aside>
-</div>
+    </div>
+  <% end %>
+</article>

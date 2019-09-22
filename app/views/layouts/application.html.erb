@@ -1,40 +1,49 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <title>FakebookApp</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-</head>
-
-<body>
-  <header>
-    <nav class="navbar navbar-light">
-      <div>
+  <head>
+    <title>FakebookApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-light">
         <div class="navbar-header">
           <%= link_to "Fakebook", feeds_path, class: "navbar-brand" %>
         </div>
         <div class="pull-right">
           <ul class="nav navbar-nav">
             <% if logged_in? %>
-            <li><%= link_to "Profile", user_path(current_user.id) %></li>
-            <li><%= link_to "Log out", session_path(current_user.id), method: :delete %></li>
+              <li><%= link_to "Profile", user_path(current_user.id) %></li>
+              <li><%= link_to "Log out", session_path(current_user.id), method: :delete %></li>
             <% else %>
-            <li><%= link_to "Sign up", new_user_path %></li>
-            <li><%= link_to "Log in", new_session_path %></li>
+              <li><%= link_to "Sign up", new_user_path %></li>
+              <li><%= link_to "Log in", new_session_path %></li>
             <% end %>
           </ul>
         </div>
-      </div>
-    </nav>
-  </header>
-  <%= yield %>
-  <footer>
-    © Yuhki ikeda
-  </footer>
-</body>
-
+      </nav>
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>">
+          <%= message %>
+        </div>
+      <% end %>
+    </header>
+    <div class="wrapper">
+      <%= yield %>
+      <aside class="pull-left clearfix">
+      <% if logged_in? %>
+        ログインユーザー：<%= current_user.name %><br>
+        <%= link_to '新規投稿', new_feed_path %>
+      <% else %>
+        ようこそゲスト様
+      <% end %>
+      </aside>
+    </div>
+    <footer>
+      © Yuhki ikeda
+    </footer>
+  </body>
 </html>
