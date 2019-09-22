@@ -2,28 +2,23 @@
   <%= notice %>
 </div>
 <div class="wrapper">
-
   <article class="main-contents pull-right">
-      <div class="post_content">
-        <ul class="menu-content">
-          <li>投稿者：<%= @feed.user.name %></li>
-        <% if logged_in? %>
-          <% if current_user.id == @feed.user.id %>
-            <li><%= link_to '編集', edit_feed_path(@feed) %></li>
-            <li><%= link_to '削除', @feed, method: :delete, data: { confirm: '本当に削除しますか？' } %></li>
-          <% end %>
+    <div class="post_content">
+      <ul class="menu-content">
+        <li>投稿者：<%= @feed.user.name %></li>
+      <% if logged_in? %>
+        <% if current_user.id == @feed.user.id %>
+          <li><%= link_to '編集', edit_feed_path(@feed) %></li>
+          <li><%= link_to '削除', @feed, method: :delete, data: { confirm: '記事を削除しますか？' } %></li>
         <% end %>
-        </ul>
-      </div>
-  <% if @feed.image? %>
-    <%= image_tag @feed.image.url %>
-  <% end %>
-  <%= @feed.content %>
-
-
+      <% end %>
+      </ul>
+    </div>
+    <% if @feed.image? %>
+      <%= image_tag @feed.image.url %>
+    <% end %>
+    <%= @feed.content %>
   </article>
-
-
   <aside class="pull-left">
     <% if logged_in? %>
       ログインユーザー：<%= current_user.name %><br>

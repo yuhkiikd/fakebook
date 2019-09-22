@@ -13,10 +13,13 @@
 
   <div class="field">
     <%= form.label :image %>
-
     <% if @feed.image? %>
       <%= image_tag(@feed.image.url) if @feed.image && @feed.image.url %>
-      <input type="submit" name="delete_image" value="画像削除">
+      <% if action_name == 'new' || action_name == 'confirm' || action_name == 'create' %>
+        <%= form.submit "画像削除", name: "delete_image" %>
+      <% else %>
+        <%= form.submit "画像削除", name: "delete_image", data: { confirm: "画像を削除しますか？" } %>
+      <% end %>
     <% end %>
 
     <%= form.file_field :image %>

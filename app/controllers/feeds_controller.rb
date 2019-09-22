@@ -19,7 +19,12 @@ class FeedsController < ApplicationController
 
   def confirm
     @feed = current_user.feeds.build(feed_params)
-    render :new if @feed.invalid?
+    if params[:delete_image]
+      @feed.image = nil
+      render :new
+    else
+      render :new if @feed.invalid?
+    end
   end
 
   def create
