@@ -41,6 +41,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'carrierwave'
+
 gem 'mini_magick'
 
 gem 'bcrypt', '3.1.11'
@@ -50,3 +51,5 @@ gem 'dotenv-rails'
 gem 'pry-rails'
 gem 'better_errors'
 gem 'binding_of_caller'
+
+gem 'rails-i18n'

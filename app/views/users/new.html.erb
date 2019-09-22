@@ -1,13 +1,15 @@
 <div class="non-sidebar-content">
   <h1>Sign up</h1>
+  <div class="error-message">
   <% if @user.errors.any? %>
-      <h2><%= pluralize(@user.errors.count, "error") %></h2>
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <h2><%= @user.errors.count %>件のエラーがあります。</h2>
+    <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
   <% end %>
+  </div>
   <%= form_with(model: @user, local: true) do |f| %>
     <div class="login-and-siginin-form-item">
       <%= f.label :name %>
