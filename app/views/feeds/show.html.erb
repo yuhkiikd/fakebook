@@ -1,6 +1,8 @@
-
+<div class="notice">
+  <%= notice %>
+</div>
 <div class="wrapper">
-<p id="notice"><%= notice %></p>
+
   <article class="main-contents pull-right">
       <div class="post_content">
         <ul class="menu-content">
@@ -8,7 +10,7 @@
         <% if logged_in? %>
           <% if current_user.id == @feed.user.id %>
             <li><%= link_to '編集', edit_feed_path(@feed) %></li>
-            <li><%= link_to '削除', feed, method: :delete, data: { confirm: '本当に削除しますか？' } %></li>
+            <li><%= link_to '削除', @feed, method: :delete, data: { confirm: '本当に削除しますか？' } %></li>
           <% end %>
         <% end %>
         </ul>
