@@ -76,7 +76,7 @@ class FeedsController < ApplicationController
   end
 
   def ensure_current_user
-    unless current_user.id == @feed.user_id
+    unless logged_in? && current_user.id == @feed.user_id
       redirect_to feeds_path
     end
   end

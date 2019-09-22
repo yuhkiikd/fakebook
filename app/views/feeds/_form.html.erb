@@ -11,26 +11,34 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="post-field">
     <%= form.label :image %>
     <% if @feed.image? %>
-      <%= image_tag(@feed.image.url) if @feed.image && @feed.image.url %>
-      <% if action_name == 'new' || action_name == 'confirm' || action_name == 'create' %>
-        <%= form.submit "画像削除", name: "delete_image" %>
-      <% else %>
-        <%= form.submit "画像削除", name: "delete_image", data: { confirm: "画像を削除しますか？" } %>
-      <% end %>
+      <div class="post-image">
+        <%= image_tag(@feed.image.url) if @feed.image && @feed.image.url %>
+      </div>
+      <div>
+        <% if action_name == 'edit' %>
+          <%= form.submit "画像削除", name: "delete_image", data: { confirm: "画像を削除しますか？" } %>
+        <% else %>
+          <%= form.submit "画像削除", name: "delete_image" %>
+        <% end %>
+      </div>
     <% end %>
 
     <%= form.file_field :image %>
     <%= form.hidden_field :image_cache %>
   </div>
-  <div class="fakebook_content">
+  <div class="post-content">
      <%= form.label :content %>
      <%= form.text_field :content %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="post-actions">
+    <% if action_name == 'edit' %>
+      <%= form.submit "更新する" %>
+    <% else %>
+      <%= form.submit "確認画面" %>
+    <% end %>
   </div>
 <% end %>
