@@ -3,12 +3,12 @@
   <%= form_with(model: @feed, url: feeds_path, local: true) do |form| %>
     <%= form.hidden_field :image_cache %>
     <%= form.hidden_field :content %>
-    <div class="post-image">
-      <%= image_tag(@feed.image.url) if @feed.image && @feed.image.url %>
-      <%= form.hidden_field :image_cache %>
-    </div>
-    <div class="post-content">
-      <%= @feed.content %>
+    <div class="post-main">
+      <div class="post-image">
+        <%= image_tag(@feed.image.url) if @feed.image && @feed.image.url %>
+        <%= form.hidden_field :image_cache %>
+      </div>
+      <p><%= @feed.content %></p>
     </div>
     <div class="post-actions">
       <%= form.submit "投稿する" %>
