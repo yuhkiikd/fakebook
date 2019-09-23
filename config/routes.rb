@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'feeds#index'
   get 'sessions/new'
   resources :feeds do
     collection do
