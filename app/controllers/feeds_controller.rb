@@ -1,6 +1,6 @@
 class FeedsController < ApplicationController
   before_action :set_feed, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_current_user, only: [:edit, :new]
+  before_action :ensure_current_user, only: [:edit]
 
   def index
     @feeds = Feed.all.order(id: "DESC")
@@ -10,10 +10,14 @@ class FeedsController < ApplicationController
   end
 
   def new
-    if params[:back]
-      @feed = Feed.new(feed_params)
+    if logged_in?
+      if params[:back]
+        @feed = Feed.new(feed_params)
+      else
+        @feed = Feed.new
+      end
     else
-      @feed = Feed.new
+      redirect_to feeds_path
     end
   end
 
