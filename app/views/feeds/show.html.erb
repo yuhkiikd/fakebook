@@ -7,7 +7,7 @@
         <li><%= link_to '削除', @feed, method: :delete, data: { confirm: '記事を削除しますか？' } %></li>
       <% end %>
     </ul>
-    <div class="post_main">
+    <div class="post-main">
       <% if @feed.image? %>
         <div class="post-image">
           <%= image_tag @feed.image.url %>

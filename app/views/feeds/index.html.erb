@@ -9,13 +9,13 @@
           <li><%= link_to '削除', feed, method: :delete, data: { confirm: '本当に削除しますか？' } %></li>
         <% end %>
       </ul>
-      <div class="post_main">
+      <div class="post-main">
         <% unless feed.image.url == nil %>
           <div class="post-image">
             <%= image_tag feed.image.url %>
           </div>
         <% end %>
-        <%= feed.content %>
+        <p><%= feed.content %></p>
       </div>
     </div>
   <% end %>
