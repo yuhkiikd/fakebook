@@ -14,7 +14,7 @@ Rails.application.configure do
 
   config.active_storage.service = :local
 
-  config.log_level = :debuginfo
+  config.log_level = :info
 
   config.log_tags = [ :request_id ]
 
