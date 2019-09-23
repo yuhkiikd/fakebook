@@ -4,17 +4,17 @@
       <ul class="post-menu clearfix">
         <li>投稿者：<%= feed.user.name %></li>
         <li><%= link_to '確認', feed %></li>
-      <% if logged_in? && current_user.id == feed.user.id %>
-        <li><%= link_to '編集', edit_feed_path(feed) %></li>
-        <li><%= link_to '削除', feed, method: :delete, data: { confirm: '本当に削除しますか？' } %></li>
-      <% end %>
+        <% if logged_in? && current_user.id == feed.user.id %>
+          <li><%= link_to '編集', edit_feed_path(feed) %></li>
+          <li><%= link_to '削除', feed, method: :delete, data: { confirm: '本当に削除しますか？' } %></li>
+        <% end %>
       </ul>
       <div class="post_main">
-      <% unless feed.image.url == nil %>
-        <div class="post-image">
-          <%= image_tag feed.image.url %>
-        </div>
-      <% end %>
+        <% unless feed.image.url == nil %>
+          <div class="post-image">
+            <%= image_tag feed.image.url %>
+          </div>
+        <% end %>
         <%= feed.content %>
       </div>
     </div>

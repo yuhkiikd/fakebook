@@ -1,6 +1,6 @@
 class FeedsController < ApplicationController
   before_action :set_feed, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_current_user, only: [:edit]
+  before_action :ensure_current_user, only: [:edit, :new]
 
   def index
     @feeds = Feed.all.order(id: "DESC")

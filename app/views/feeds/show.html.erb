@@ -2,17 +2,17 @@
   <div class="main-contents-post">
     <ul class="post-menu clearfix">
       <li>投稿者：<%= @feed.user.name %></li>
-    <% if logged_in? && current_user.id == @feed.user.id %>
-      <li><%= link_to '編集', edit_feed_path(@feed) %></li>
-      <li><%= link_to '削除', @feed, method: :delete, data: { confirm: '記事を削除しますか？' } %></li>
-    <% end %>
+      <% if logged_in? && current_user.id == @feed.user.id %>
+        <li><%= link_to '編集', edit_feed_path(@feed) %></li>
+        <li><%= link_to '削除', @feed, method: :delete, data: { confirm: '記事を削除しますか？' } %></li>
+      <% end %>
     </ul>
     <div class="post_main">
-    <% if @feed.image? %>
-      <div class="post-image">
-        <%= image_tag @feed.image.url %>
-      </div>
-    <% end %>
+      <% if @feed.image? %>
+        <div class="post-image">
+          <%= image_tag @feed.image.url %>
+        </div>
+      <% end %>
       <%= @feed.content %>
     </div>
   </div>
